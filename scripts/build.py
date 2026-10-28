@@ -304,6 +304,14 @@ def find(repos: list[dict], query: str, k: int = 3) -> list[dict]:
 FIND_DEFAULT = "receipts to a CSV"
 
 
+def skill_line(k: int, n: int) -> str:
+    if k == n:
+        return "Every one also ships a Claude skill"
+    if k == 1:
+        return "One of them also ships a Claude skill"
+    return f"{words(k).capitalize()} of the {words(n)} also ship a Claude skill"
+
+
 def render(repos: list[dict], fetched: str) -> None:
     tpl = (ROOT / "src" / "index.html").read_text(encoding="utf-8")
     n = len(repos)
@@ -351,7 +359,7 @@ def render(repos: list[dict], fetched: str) -> None:
         "{{FIRST_NAME}}": first["name"],
         "{{FIND_DEFAULT}}": FIND_DEFAULT,
         "{{FIND_RESULTS}}": "\n".join(row_html(r, cls="hit", thumb=True) for r in find(repos, FIND_DEFAULT)),
-        "{{SKILL_COUNT_CAP}}": words(sum(r["has_skill"] for r in repos)).capitalize(),
+        "{{SKILL_LINE}}": skill_line(sum(r["has_skill"] for r in repos), n),
         "{{DATA}}": data_js,
         "{{JSONLD}}": json.dumps(ld, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/"),
     }
