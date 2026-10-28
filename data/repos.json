@@ -1,6 +1,6 @@
 {
   "org": "amagilabs",
-  "fetched": "2026-10-28T09:32:02Z",
+  "fetched": "2026-10-28T10:19:24Z",
   "repos": [
     {
       "name": "amagi-contract-deadlines",
@@ -452,9 +452,9 @@
       "created": "2026-10-22",
       "pushed": "2026-10-22",
       "branch": "master",
-      "install": "pipx install git+https://github.com/amagilabs/amagi-staleref",
-      "on_pypi": false,
-      "pypi": "",
+      "install": "pipx install amagi-staleref",
+      "on_pypi": true,
+      "pypi": "https://pypi.org/project/amagi-staleref/",
       "has_skill": true,
       "shot": "assets/shots/amagi-staleref.webp",
       "shot_size": [
