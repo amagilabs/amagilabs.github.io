@@ -1,3 +1,8 @@
+"""Lighthouse (mobile + desktop) against a local server of the built site.
+
+Usage (from the site dir, Python 3.12 with node/npx on PATH):  python scripts/lighthouse.py . ../_screens
+Writes lighthouse-mobile.json and lighthouse-desktop.json into the output dir and prints the four scores.
+"""
 import functools, http.server, socketserver, threading, subprocess, json, sys, os
 root = sys.argv[1]; out = sys.argv[2]
 class Q(http.server.SimpleHTTPRequestHandler):
