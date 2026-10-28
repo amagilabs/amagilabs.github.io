@@ -61,17 +61,25 @@
 <section class="hero" aria-labelledby="hero-title">
   <div class="field field-top" data-chapter="paper"></div>
   <div class="field field-low" data-chapter="clay"></div>
-  <div class="hero-type">
-    <h1 id="hero-title" class="headline ink-top">
+  <h1 id="hero-title" class="hero-type">
+    <span class="headline ink-top">
       <span class="line">Real <span class="slot" aria-hidden="true"><video class="slot-clip" src="assets/media/hero.mp4" poster="assets/media/hero.webp" width="640" height="256" muted loop playsinline autoplay preload="metadata" aria-hidden="true" tabindex="-1"></video></span> builds.</span>
       <span class="line">No hype.</span>
-    </h1>
-    <p class="headline ink-low" aria-hidden="true">
+    </span>
+    <span class="headline ink-low" aria-hidden="true">
       <span class="line">Real <span class="slot"></span> builds.</span>
       <span class="line">No hype.</span>
-    </p>
+    </span>
+  </h1>
+  <div class="hero-more">
+    <p class="hero-sub" data-reveal>Sixteen open-source command-line tools and Claude skills for small businesses, law firms and developers. Each one is MIT licensed and installs with a single pipx line.</p>
+    <ul class="hero-shots" aria-label="Four of the tools, as their demos show them">
+<li data-reveal><a href="#amagi-contract-deadlines"><img src="assets/shots/amagi-contract-deadlines.webp" width="1028" height="948" alt="Terminal frame from the amagi-contract-deadlines demo" decoding="async"><span>amagi-contract-deadlines</span></a></li>
+<li data-reveal><a href="#amagi-crm"><img src="assets/shots/amagi-crm.webp" width="1028" height="718" alt="Terminal frame from the amagi-crm demo" decoding="async"><span>amagi-crm</span></a></li>
+<li data-reveal><a href="#amagi-vaultgraph"><img src="assets/shots/amagi-vaultgraph.webp" width="1028" height="810" alt="Terminal frame from the amagi-vaultgraph demo" decoding="async"><span>amagi-vaultgraph</span></a></li>
+<li data-reveal><a href="#amagi-skill-lint"><img src="assets/shots/amagi-skill-lint.webp" width="1200" height="832" alt="Terminal frame from the amagi-skill-lint demo" decoding="async"><span>amagi-skill-lint</span></a></li>
+    </ul>
   </div>
-  <p class="hero-sub">Sixteen open-source command-line tools and Claude skills for small businesses, law firms and developers. Each one is MIT licensed and installs with a single pipx line.</p>
 </section>
 
 <section class="tools" id="tools" data-chapter="paper" aria-labelledby="tools-title">
@@ -112,18 +120,20 @@
 
 <section class="find" id="find" data-chapter="ink" aria-labelledby="find-title">
   <h2 id="find-title" class="sr-only">Find a tool for the job</h2>
-  <div class="find-box" data-ui>
+  <div class="find-box">
     <label for="find-q" class="sr-only">Describe the job in a few words</label>
-    <input id="find-q" class="find-q" type="search" value="receipts to a CSV" autocomplete="off" spellcheck="false" aria-describedby="find-help" aria-controls="find-out">
+    <input id="find-q" class="find-q" type="search" value="legal deadlines" autocomplete="off" spellcheck="false" aria-describedby="find-help" aria-controls="find-out">
     <p id="find-help" class="find-help">Type the job you have. The closest tools show up below.</p>
+    <div class="find-try" role="group" aria-label="Examples">
+      <button type="button" data-q="receipts to a CSV">receipts to a CSV</button>
+      <button type="button" data-q="a video for Claude">a video for Claude</button>
+      <button type="button" data-q="check my site before I ship">check my site before I ship</button>
+    </div>
     <ol class="find-out" id="find-out" aria-live="polite">
-<li class="hit" data-shot="assets/shots/amagi-receipts-to-csv.webp" data-w="1068" data-h="718" data-reveal><img class="hit-pic" src="assets/shots/amagi-receipts-to-csv.webp" width="1068" height="718" alt="Terminal frame from the amagi-receipts-to-csv demo" loading="lazy" decoding="async"><div class="row-body"><h3 class="row-name"><a href="https://github.com/amagilabs/amagi-receipts-to-csv"><span class="pre">amagi-</span>receipts-to-csv</a></h3><p class="row-desc">Turn a folder of receipt photos and PDFs into a clean CSV (date, vendor, subtotal, tax, total, category) with local OCR. QuickBooks Online bank-import preset. No cloud upload.</p><div class="row-meta"><code class="cmd">pipx install amagi-receipts-to-csv</code><button class="copy" type="button" data-copy="pipx install amagi-receipts-to-csv" aria-label="Copy the install command for amagi-receipts-to-csv">Copy</button><span class="tag">Claude skill</span><a class="gh" href="https://github.com/amagilabs/amagi-receipts-to-csv">GitHub<span class="sr-only">: amagi-receipts-to-csv</span></a></div></div></li>
+<li class="hit" data-shot="assets/shots/amagi-litigation-deadlines.webp" data-w="1128" data-h="718" data-reveal><img class="hit-pic" src="assets/shots/amagi-litigation-deadlines.webp" width="1128" height="718" alt="Terminal frame from the amagi-litigation-deadlines demo" loading="lazy" decoding="async"><div class="row-body"><h3 class="row-name"><a href="https://github.com/amagilabs/amagi-litigation-deadlines"><span class="pre">amagi-</span>litigation-deadlines</a></h3><p class="row-desc">Compute litigation response deadlines from a trigger event and date, with citations for every rule.</p><div class="row-meta"><code class="cmd">pipx install amagi-litigation-deadlines</code><button class="copy" type="button" data-copy="pipx install amagi-litigation-deadlines" aria-label="Copy the install command for amagi-litigation-deadlines">Copy</button><span class="tag">Claude skill</span><a class="gh" href="https://github.com/amagilabs/amagi-litigation-deadlines">GitHub<span class="sr-only">: amagi-litigation-deadlines</span></a></div></div></li>
+<li class="hit" data-shot="assets/shots/amagi-contract-deadlines.webp" data-w="1028" data-h="948" data-reveal><img class="hit-pic" src="assets/shots/amagi-contract-deadlines.webp" width="1028" height="948" alt="Terminal frame from the amagi-contract-deadlines demo" loading="lazy" decoding="async"><div class="row-body"><h3 class="row-name"><a href="https://github.com/amagilabs/amagi-contract-deadlines"><span class="pre">amagi-</span>contract-deadlines</a></h3><p class="row-desc">Point it at a folder of contracts and leases. Get every renewal, notice-window, expiry and option date, with the clause it came from, as an .ics calendar and a CSV.</p><div class="row-meta"><code class="cmd">pipx install amagi-contract-deadlines</code><button class="copy" type="button" data-copy="pipx install amagi-contract-deadlines" aria-label="Copy the install command for amagi-contract-deadlines">Copy</button><span class="tag">Claude skill</span><a class="gh" href="https://github.com/amagilabs/amagi-contract-deadlines">GitHub<span class="sr-only">: amagi-contract-deadlines</span></a></div></div></li>
+<li class="hit" data-shot="assets/shots/amagi-legal-review-skills.webp" data-w="860" data-h="480" data-reveal><img class="hit-pic" src="assets/shots/amagi-legal-review-skills.webp" width="860" height="480" alt="Terminal frame from the amagi-legal-review-skills demo" loading="lazy" decoding="async"><div class="row-body"><h3 class="row-name"><a href="https://github.com/amagilabs/amagi-legal-review-skills"><span class="pre">amagi-</span>legal-review-skills</a></h3><p class="row-desc">A Claude Code skills and subagents pack for first-pass review of NDAs, MSAs, SaaS agreements, contractor agreements, and commercial or residential leases.</p><div class="row-meta"><code class="cmd">pipx install amagi-legal-review-skills</code><button class="copy" type="button" data-copy="pipx install amagi-legal-review-skills" aria-label="Copy the install command for amagi-legal-review-skills">Copy</button><span class="tag">Claude skill</span><a class="gh" href="https://github.com/amagilabs/amagi-legal-review-skills">GitHub<span class="sr-only">: amagi-legal-review-skills</span></a></div></div></li>
     </ol>
-  </div>
-  <div class="find-try" role="group" aria-label="Examples">
-    <button type="button" data-q="lease renewal dates">lease renewal dates</button>
-    <button type="button" data-q="a video for Claude">a video for Claude</button>
-    <button type="button" data-q="my .env before deploy">my .env before deploy</button>
   </div>
 </section>
 
@@ -135,8 +145,8 @@
     <li><span>Write to</span> <a href="mailto:dev@amagisolutionsgroup.com">dev@amagisolutionsgroup.com</a></li>
   </ul>
   <div class="bio">
-    <p class="bio-lead" data-reveal><img class="dropcap" src="assets/brand/amagilabs-icon-480.webp" width="480" height="480" alt="The AmagiLabs mark: a flask with steam curling into clouds, on a terracotta disc" loading="lazy"><strong>AmagiLabs</strong> is the open-source lab of Amagisolutionsgroup, Inc. We build small tools for the paperwork and plumbing small firms run on: lease and contract deadlines, receipts for the books, federal RFP matrices, court deadlines, and the checks a developer runs before a deploy.</p>
-    <p class="bio-more" data-reveal>Each one is a Python command-line tool you install with pipx and run on your own machine. Every one also ships a Claude skill, so <a href="https://docs.claude.com/en/docs/claude-code/overview">Claude Code</a> can run the tool for you. Found a bug? Open an issue on that tool's repo. Done-with-you setup lives at <a href="https://amagilabs.ai">amagilabs.ai</a>.</p>
+    <p class="bio-lead" data-reveal><img class="dropcap" src="assets/brand/amagilabs-icon-480.webp" width="480" height="480" alt="The AmagiLabs mark: a flask with steam curling into clouds, on a terracotta disc" loading="lazy"><strong>AmagiLabs</strong> is the open-source lab of Amagisolutionsgroup, Inc. We make small tools for the paperwork small firms run on.</p>
+    <p class="bio-more" data-reveal>Lease and contract deadlines, receipts for the books, federal RFP matrices, court deadlines, and the checks a developer runs before a deploy. Each one is a Python command-line tool you install with pipx and run on your own machine. Every one also ships a Claude skill, so <a href="https://docs.claude.com/en/docs/claude-code/overview">Claude Code</a> can run the tool for you. Found a bug? Open an issue on that tool's repo. Done-with-you setup lives at <a href="https://amagilabs.ai">amagilabs.ai</a>.</p>
   </div>
 </section>
 </main>

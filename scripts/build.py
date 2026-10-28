@@ -301,7 +301,7 @@ def find(repos: list[dict], query: str, k: int = 3) -> list[dict]:
     return [r for sc, _, r in ranked[:k] if sc > 0 and sc * 3 >= top]
 
 
-FIND_DEFAULT = "receipts to a CSV"
+FIND_DEFAULT = "legal deadlines"
 
 
 def skill_line(k: int, n: int) -> str:
@@ -310,6 +310,24 @@ def skill_line(k: int, n: int) -> str:
     if k == 1:
         return "One of them also ships a Claude skill"
     return f"{words(k).capitalize()} of the {words(n)} also ship a Claude skill"
+
+
+HERO_CLIP_FROM = "amagi-receipts-to-csv"  # already moving in the headline; scripts/assets.py cuts it
+
+
+def hero_shots(repos: list[dict]) -> str:
+    """One still per group (the largest frame), shown in the hero's lower field."""
+    out = []
+    for _, _, names in GROUPS:
+        pool = [r for r in repos if r["name"] in names and r.get("shot") and r["name"] != HERO_CLIP_FROM]
+        if not pool:
+            continue
+        r = max(pool, key=lambda x: x["shot_size"][0] * x["shot_size"][1])
+        w, h = r["shot_size"]
+        out.append(f'<li data-reveal><a href="#{esc(r["name"])}"><img src="{esc(r["shot"])}" width="{w}" '
+                   f'height="{h}" alt="Terminal frame from the {esc(r["name"])} demo" decoding="async">'
+                   f'<span>{esc(r["name"])}</span></a></li>')
+    return "\n".join(out)
 
 
 def render(repos: list[dict], fetched: str) -> None:
@@ -358,6 +376,7 @@ def render(repos: list[dict], fetched: str) -> None:
         "{{FIRST_SHOT_H}}": str(first["shot_size"][1]),
         "{{FIRST_NAME}}": first["name"],
         "{{FIND_DEFAULT}}": FIND_DEFAULT,
+        "{{HERO_SHOTS}}": hero_shots(repos),
         "{{FIND_RESULTS}}": "\n".join(row_html(r, cls="hit", thumb=True) for r in find(repos, FIND_DEFAULT)),
         "{{SKILL_LINE}}": skill_line(sum(r["has_skill"] for r in repos), n),
         "{{DATA}}": data_js,
