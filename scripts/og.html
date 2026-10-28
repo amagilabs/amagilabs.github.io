@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>AmagiLabs social card</title>
+<meta name="robots" content="noindex">
+<style>
+@font-face { font-family: "Montserrat"; src: url("../assets/fonts/montserrat-latin.woff2") format("woff2"); font-weight: 400 700; }
+@font-face { font-family: "Playfair Display"; src: url("../assets/fonts/playfair-display-latin.woff2") format("woff2"); font-weight: 600 900; }
+html, body { margin: 0; }
+.card { position: relative; width: 1200px; height: 630px; overflow: hidden; background: #F6F4F1; font-family: "Montserrat", sans-serif; color: #161616; }
+.low { position: absolute; left: 0; right: 0; top: 330px; bottom: 0; background: #D27A73; }
+.type { position: absolute; left: 64px; top: calc(330px - 1.27em); font-size: 150px; display: grid; }
+.type span { grid-area: 1 / 1; font: 900 1em/.95 "Playfair Display", serif; letter-spacing: -.025em; white-space: nowrap; }
+.type span b { display: block; font-weight: 900; }
+.top { color: #161616; clip-path: inset(0 0 calc(100% - 1.27em) 0); }
+.bot { color: #3A1512; clip-path: inset(1.27em 0 0 0); }
+.mark { position: absolute; left: 64px; top: 48px; display: flex; align-items: center; gap: 16px; }
+.mark img { width: 64px; height: 64px; }
+.mark .wm { height: 40px; }
+.mark .wm svg { height: 40px; width: auto; display: block; }
+.foot { position: absolute; left: 64px; right: 64px; bottom: 44px; display: flex; justify-content: space-between; align-items: end; font-size: 26px; font-weight: 600; color: #161616; }
+.foot small { font-size: 22px; font-weight: 500; }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="low"></div>
+  <div class="mark"><img src="../assets/brand/amagilabs-icon-192.png" alt=""><span class="wm" id="wm"></span></div>
+  <div class="type" aria-label="Real builds. No hype.">
+    <span class="top"><b>Real builds.</b><b>No hype.</b></span>
+    <span class="bot" aria-hidden="true"><b>Real builds.</b><b>No hype.</b></span>
+  </div>
+  <div class="foot"><span id="count">Open-source CLI tools and Claude skills</span><small>amagilabs.github.io</small></div>
+</div>
+</body>
+</html>
