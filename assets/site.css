@@ -377,7 +377,7 @@ html.rv [data-reveal] {
   .wordmark { display: none; }
   .action { padding: 0 14px; }
   .menu summary { padding: 0 12px; }
-  .hero { --h: clamp(48px, 16vw, 96px); --seam: 44svh; min-height: max(124svh, 980px); }
+  .hero { --h: clamp(48px, 16vw, 96px); --seam: 36svh; min-height: max(124svh, 980px); }
   .slot { display: none; }
   .hero-more { top: calc(var(--seam) + .72 * var(--h) + 28px); gap: 28px; }
   .hero-sub { font-size: 20px; }
