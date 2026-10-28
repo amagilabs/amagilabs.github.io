@@ -198,7 +198,7 @@ def fetch() -> list[dict]:
     DATA.parent.mkdir(parents=True, exist_ok=True)
     DATA.write_text(json.dumps({"org": ORG, "fetched": dt.datetime.now(dt.timezone.utc)
                                 .strftime("%Y-%m-%dT%H:%M:%SZ"), "repos": out}, indent=2),
-                    encoding="utf-8")
+                    encoding="utf-8", newline="\n")
     return out
 
 
@@ -387,12 +387,12 @@ def render(repos: list[dict], fetched: str) -> None:
     left = re.findall(r"\{\{[A-Z_]+\}\}", tpl)
     if left:
         sys.exit(f"unfilled placeholders: {left}")
-    (ROOT / "index.html").write_text(tpl, encoding="utf-8")
+    (ROOT / "index.html").write_text(tpl, encoding="utf-8", newline="\n")
     (ROOT / "sitemap.xml").write_text(
         '<?xml version="1.0" encoding="UTF-8"?>\n'
         '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
         f"  <url><loc>{SITE}/</loc><lastmod>{fetched[:10]}</lastmod></url>\n"
-        "</urlset>\n", encoding="utf-8")
+        "</urlset>\n", encoding="utf-8", newline="\n")
     print(f"rendered index.html with {n} repos (data fetched {fetched})")
 
 

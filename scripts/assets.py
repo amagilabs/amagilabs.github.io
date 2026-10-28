@@ -93,7 +93,7 @@ def brand_files(brand: Path) -> None:
     x1, y1 = vb[0] + vb[2], vb[1] + vb[3]
     (out / "wordmark.svg").write_text(
         f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="{x0:.1f} {y0:.1f} {x1 - x0:.1f} {y1 - y0:.1f}">'
-        f'{amagi}{rule}{labs}</svg>\n', encoding="utf-8")
+        f'{amagi}{rule}{labs}</svg>\n', encoding="utf-8", newline="\n")
     print(f"  assets/brand/ + favicons  (wordmark box {x1 - x0:.0f}x{y1 - y0:.0f})")
 
 
