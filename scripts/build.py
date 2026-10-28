@@ -143,7 +143,7 @@ def demo_still(name: str, branch: str) -> str | None:
             f = im.convert("RGB")
             small = f.resize((160, max(1, round(f.height * 160 / f.width))))
             bg = small.getpixel((small.width - 1, small.height - 1))
-            score = sum(1 for px in small.getdata() if sum(abs(a - b) for a, b in zip(px, bg)) > 60)
+            score = sum(1 for px in (small.get_flattened_data() if hasattr(small, "get_flattened_data") else small.getdata()) if sum(abs(a - b) for a, b in zip(px, bg)) > 60)
             if score >= best_score:
                 best, best_score = f, score
         frame = best
@@ -221,6 +221,35 @@ def words(n: int) -> str:
     return small[n] if n < len(small) else str(n)
 
 
+def row_html(r: dict, tag: str = "li", cls: str = "row", thumb: bool = False) -> str:
+    short = r["name"].removeprefix("amagi-")
+    attrs = ""
+    if r.get("shot"):
+        w, h = r.get("shot_size") or (1200, 750)
+        attrs = f' data-shot="{esc(r["shot"])}" data-w="{w}" data-h="{h}"'
+    pic = ""
+    if thumb and r.get("shot"):
+        w, h = r.get("shot_size") or (1200, 750)
+        pic = (f'<img class="hit-pic" src="{esc(r["shot"])}" width="{w}" height="{h}" '
+               f'alt="Terminal frame from the {esc(r["name"])} demo" loading="lazy" decoding="async">')
+    tags = []
+    if r["has_skill"]:
+        tags.append('<span class="tag">Claude skill</span>')
+    if not r["on_pypi"]:
+        tags.append('<span class="tag">installs from GitHub</span>')
+    head = "h4" if tag == "li" and cls == "row" else "h3"
+    rid = "" if thumb else f' id="{esc(r["name"])}"'  # the list rows are anchor targets
+    return (f'<{tag} class="{cls}"{rid}{attrs} data-reveal>'
+            f'{pic}<div class="row-body"><{head} class="row-name"><a href="{esc(r["url"])}">'
+            f'<span class="pre">amagi-</span>{esc(short)}</a></{head}>'
+            f'<p class="row-desc">{esc(r["description"])}</p>'
+            f'<div class="row-meta"><code class="cmd">{esc(r["install"])}</code>'
+            f'<button class="copy" type="button" data-copy="{esc(r["install"])}" '
+            f'aria-label="Copy the install command for {esc(r["name"])}">Copy</button>'
+            f'{"".join(tags)}<a class="gh" href="{esc(r["url"])}">'
+            f'GitHub<span class="sr-only">: {esc(r["name"])}</span></a></div></div></{tag}>')
+
+
 def render_rows(repos: list[dict]) -> str:
     order = [g[0] for g in GROUPS] + [OTHER[0]]
     by = {k: [] for k in order}
@@ -229,36 +258,58 @@ def render_rows(repos: list[dict]) -> str:
         by[group_of(r["name"])[0]].append(r)
     parts = []
     for key in order:
-        items = by[key]
-        if not items:
+        if not by[key]:
             continue
-        parts.append(f'<section class="group" aria-labelledby="g-{key}">'
-                     f'<h3 id="g-{key}" class="group-name">{esc(labels[key])}</h3><ul class="rows">')
-        for r in items:
-            short = r["name"].removeprefix("amagi-")
-            shot = f' data-shot="{esc(r["shot"])}"' if r.get("shot") else ""
-            skill = '<span class="tag">Claude skill included</span>' if r["has_skill"] else ""
-            note = "" if r["on_pypi"] else '<span class="tag">installs from GitHub</span>'
-            parts.append(
-                f'<li class="row" id="{esc(r["name"])}"{shot}>'
-                f'<h4 class="row-name"><a href="{esc(r["url"])}">'
-                f'<span class="pre">amagi-</span>{esc(short)}</a></h4>'
-                f'<p class="row-desc">{esc(r["description"])}</p>'
-                f'<div class="row-meta"><code class="cmd">{esc(r["install"])}</code>'
-                f'<button class="copy" type="button" data-copy="{esc(r["install"])}" '
-                f'aria-label="Copy install command for {esc(r["name"])}">Copy</button>'
-                f'{skill}{note}<a class="gh" href="{esc(r["url"])}" '
-                f'aria-label="{esc(r["name"])} on GitHub">GitHub</a></div></li>')
-        parts.append("</ul></section>")
+        parts.append(f'<div class="group"><h3 class="group-name" data-reveal>{esc(labels[key])}</h3>'
+                     f'<ul class="rows">')
+        parts += [row_html(r) for r in by[key]]
+        parts.append("</ul></div>")
     return "\n".join(parts)
+
+
+# Type-to-find. site.js runs the same scoring in the browser; this copy prerenders the default
+# query so the box shows real answers before (or without) JavaScript.
+STOP = set("a an the for to of and or my our your before after in on with from into i me it is "
+           "this that by at as be can do get how what want need".split())
+
+
+def tokens(text: str) -> list[str]:
+    out = []
+    for t in re.split(r"[^a-z0-9]+", text.lower()):
+        if len(t) < 2 or t in STOP:
+            continue
+        out.append(t[:-1] if len(t) > 3 and t.endswith("s") and not t.endswith("ss") else t)
+    return out
+
+
+def score(r: dict, q: list[str]) -> int:
+    name = tokens(r["name"].removeprefix("amagi-"))
+    topics = [w for t in r["topics"] for w in tokens(t)]
+    desc = tokens(r["description"])
+    total = 0
+    for t in q:
+        hit = lambda ws: any(w.startswith(t) or (len(w) >= 3 and t.startswith(w)) for w in ws)
+        total += 3 * hit(name) + 2 * hit(topics) + hit(desc)
+    return total
+
+
+def find(repos: list[dict], query: str, k: int = 3) -> list[dict]:
+    q = tokens(query)
+    ranked = sorted(((score(r, q), r["name"], r) for r in repos), key=lambda x: (-x[0], x[1]))
+    top = ranked[0][0] if ranked else 0
+    # Drop stragglers: a tool that matched one word of the description is noise next to a real hit.
+    return [r for sc, _, r in ranked[:k] if sc > 0 and sc * 3 >= top]
+
+
+FIND_DEFAULT = "receipts to a CSV"
 
 
 def render(repos: list[dict], fetched: str) -> None:
     tpl = (ROOT / "src" / "index.html").read_text(encoding="utf-8")
     n = len(repos)
     lic = sorted({r["license"] for r in repos if r["license"]})
-    data_js = json.dumps([{k: r[k] for k in ("name", "description", "url", "install", "topics",
-                                              "has_skill", "shot")} | {"group": group_of(r["name"])[1]}
+    data_js = json.dumps([{k: r.get(k) for k in ("name", "description", "url", "install", "topics",
+                                                  "has_skill", "on_pypi", "shot", "shot_size")}
                           for r in repos], ensure_ascii=False).replace("</", "<\\/")
     ld = {
         "@context": "https://schema.org",
@@ -282,15 +333,25 @@ def render(repos: list[dict], fetched: str) -> None:
     }
     for el in ld["@graph"][2]["itemListElement"]:
         el["item"] = {k: v for k, v in el["item"].items() if v is not None}
-    first = min((r["created"] for r in repos), default="")
+    first_day = min((r["created"] for r in repos), default="")
+    ordered = [r for g in GROUPS for name in g[2] for r in repos if r["name"] == name]
+    first = next(r for r in ordered + repos if r.get("shot"))
     subs = {
         "{{COUNT}}": str(n),
         "{{COUNT_WORD}}": words(n),
         "{{COUNT_WORD_CAP}}": words(n).capitalize(),
         "{{LICENSES}}": " and ".join(lic) or "open source",
-        "{{FIRST_MONTH}}": dt.date.fromisoformat(first).strftime("%B %Y") if first else "",
+        "{{FIRST_MONTH}}": dt.date.fromisoformat(first_day).strftime("%B %Y") if first_day else "",
         "{{FETCHED}}": fetched[:10],
         "{{ROWS}}": render_rows(repos),
+        "{{WORDMARK}}": (ROOT / "assets" / "brand" / "wordmark.svg").read_text(encoding="utf-8").strip(),
+        "{{FIRST_SHOT}}": first["shot"],
+        "{{FIRST_SHOT_W}}": str(first["shot_size"][0]),
+        "{{FIRST_SHOT_H}}": str(first["shot_size"][1]),
+        "{{FIRST_NAME}}": first["name"],
+        "{{FIND_DEFAULT}}": FIND_DEFAULT,
+        "{{FIND_RESULTS}}": "\n".join(row_html(r, cls="hit", thumb=True) for r in find(repos, FIND_DEFAULT)),
+        "{{SKILL_COUNT_CAP}}": words(sum(r["has_skill"] for r in repos)).capitalize(),
         "{{DATA}}": data_js,
         "{{JSONLD}}": json.dumps(ld, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/"),
     }

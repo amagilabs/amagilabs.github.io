@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://amagilabs.github.io/sitemap.xml

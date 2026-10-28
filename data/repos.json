@@ -1,6 +1,6 @@
 {
   "org": "amagilabs",
-  "fetched": "2026-10-28T09:17:17Z",
+  "fetched": "2026-10-28T09:32:02Z",
   "repos": [
     {
       "name": "amagi-contract-deadlines",
@@ -103,7 +103,7 @@
       "install": "pipx install amagi-env-check",
       "on_pypi": true,
       "pypi": "https://pypi.org/project/amagi-env-check/",
-      "has_skill": false,
+      "has_skill": true,
       "shot": "assets/shots/amagi-env-check.webp",
       "shot_size": [
         1028,
@@ -260,7 +260,7 @@
       "install": "pipx install amagi-mcp-probe",
       "on_pypi": true,
       "pypi": "https://pypi.org/project/amagi-mcp-probe/",
-      "has_skill": false,
+      "has_skill": true,
       "shot": "assets/shots/amagi-mcp-probe.webp",
       "shot_size": [
         1200,
@@ -294,7 +294,7 @@
       "install": "pipx install amagi-name-check",
       "on_pypi": true,
       "pypi": "https://pypi.org/project/amagi-name-check/",
-      "has_skill": false,
+      "has_skill": true,
       "shot": "assets/shots/amagi-name-check.webp",
       "shot_size": [
         1028,
@@ -498,7 +498,7 @@
       "install": "pipx install amagi-vaultgraph",
       "on_pypi": true,
       "pypi": "https://pypi.org/project/amagi-vaultgraph/",
-      "has_skill": false,
+      "has_skill": true,
       "shot": "assets/shots/amagi-vaultgraph.webp",
       "shot_size": [
         1028,

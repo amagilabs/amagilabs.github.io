@@ -64,12 +64,13 @@ def brand_files(brand: Path) -> None:
         im = im.convert("RGBA")
         for size in (96, 192):
             im.resize((size, size), Image.LANCZOS).save(out / f"amagilabs-icon-{size}.png", optimize=True)
+        # The about section's drop cap sits on a coloured field, so it needs the transparent mark.
+        im.resize((480, 480), Image.LANCZOS).save(out / "amagilabs-icon-480.webp", quality=88, method=6)
         # favicon.ico: small sizes from the transparent mark
         im.save(ROOT / "favicon.ico", sizes=[(16, 16), (32, 32), (48, 48)])
     with Image.open(final / "amagilabs-icon-1024.png") as im:
         im = im.convert("RGB")
         im.resize((512, 512), Image.LANCZOS).save(out / "amagilabs-icon-512.png", optimize=True)
-        im.resize((480, 480), Image.LANCZOS).save(out / "amagilabs-icon-480.webp", quality=88, method=6)
         im.resize((180, 180), Image.LANCZOS).save(ROOT / "apple-touch-icon.png", optimize=True)
     shutil.copyfile(final / "amagilabs-icon-transparent.svg", ROOT / "favicon.svg")
 

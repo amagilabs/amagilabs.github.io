@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AmagiLabs: open-source CLI tools and Claude skills</title>
+<meta name="description" content="{{COUNT_WORD_CAP}} MIT-licensed command-line tools and Claude skills from Amagisolutionsgroup, Inc. for small businesses, law firms and developers. Each installs with one pipx line.">
+<link rel="canonical" href="https://amagilabs.github.io/">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#F6F4F1" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#161616" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="favicon.ico" sizes="48x48">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AmagiLabs">
+<meta property="og:url" content="https://amagilabs.github.io/">
+<meta property="og:title" content="AmagiLabs: open-source CLI tools and Claude skills">
+<meta property="og:description" content="{{COUNT_WORD_CAP}} MIT-licensed command-line tools and Claude skills for small businesses, law firms and developers. One pipx line each.">
+<meta property="og:image" content="https://amagilabs.github.io/assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="AmagiLabs. Real builds. No hype.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="AmagiLabs: open-source CLI tools and Claude skills">
+<meta name="twitter:description" content="{{COUNT_WORD_CAP}} MIT-licensed command-line tools and Claude skills. One pipx line each.">
+<meta name="twitter:image" content="https://amagilabs.github.io/assets/og.png">
+<link rel="preload" href="assets/fonts/playfair-display-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/montserrat-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/site.css">
+<script>document.documentElement.classList.add('js')</script>
+<script type="application/ld+json">{{JSONLD}}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to the tools</a>
+
+<header class="bar" id="top" data-ink="paper">
+  <a class="mark" href="./" aria-label="AmagiLabs home">
+    <img src="assets/brand/amagilabs-icon-96.png" width="40" height="40" alt="">
+    <span class="wordmark" aria-hidden="true">{{WORDMARK}}</span>
+  </a>
+  <nav class="nav" aria-label="Main">
+    <a href="#tools">Tools</a>
+    <a href="#find">Find one</a>
+    <a href="#about">About</a>
+    <a href="https://github.com/amagilabs">GitHub</a>
+  </nav>
+  <details class="menu">
+    <summary>Menu</summary>
+    <nav aria-label="Main, small screens">
+      <a href="#tools">Tools</a>
+      <a href="#find">Find one</a>
+      <a href="#about">About</a>
+      <a href="https://github.com/amagilabs">GitHub</a>
+    </nav>
+  </details>
+  <a class="action" href="#tools">Browse the tools</a>
+</header>
+
+<main id="main">
+<section class="hero" aria-labelledby="hero-title">
+  <div class="field field-top" data-chapter="paper"></div>
+  <div class="field field-low" data-chapter="clay"></div>
+  <div class="hero-type">
+    <h1 id="hero-title" class="headline ink-top">
+      <span class="line">Real <span class="slot" aria-hidden="true"><video class="slot-clip" src="assets/media/hero.mp4" poster="assets/media/hero.webp" width="640" height="256" muted loop playsinline autoplay preload="metadata" aria-hidden="true" tabindex="-1"></video></span> builds.</span>
+      <span class="line">No hype.</span>
+    </h1>
+    <p class="headline ink-low" aria-hidden="true">
+      <span class="line">Real <span class="slot"></span> builds.</span>
+      <span class="line">No hype.</span>
+    </p>
+  </div>
+  <p class="hero-sub">{{COUNT_WORD_CAP}} open-source command-line tools and Claude skills for small businesses, law firms and developers. Each one is MIT licensed and installs with a single pipx line.</p>
+</section>
+
+<section class="tools" id="tools" data-chapter="paper" aria-labelledby="tools-title">
+  <h2 id="tools-title" class="statement" data-reveal>{{COUNT_WORD_CAP}} tools, one install line each.</h2>
+  <div class="tools-grid">
+    <figure class="preview" aria-live="off">
+      <img class="preview-img" src="{{FIRST_SHOT}}" width="{{FIRST_SHOT_W}}" height="{{FIRST_SHOT_H}}" alt="Terminal frame from the {{FIRST_NAME}} demo recording" loading="lazy" decoding="async">
+      <figcaption class="preview-cap">{{FIRST_NAME}}, a frame from its README demo</figcaption>
+    </figure>
+    <div class="table">
+{{ROWS}}
+    </div>
+  </div>
+</section>
+
+<section class="find" id="find" data-chapter="ink" aria-labelledby="find-title">
+  <h2 id="find-title" class="sr-only">Find a tool for the job</h2>
+  <div class="find-box" data-ui>
+    <label for="find-q" class="sr-only">Describe the job in a few words</label>
+    <input id="find-q" class="find-q" type="search" value="{{FIND_DEFAULT}}" autocomplete="off" spellcheck="false" aria-describedby="find-help" aria-controls="find-out">
+    <p id="find-help" class="find-help">Type the job you have. The closest tools show up below.</p>
+    <ol class="find-out" id="find-out" aria-live="polite">
+{{FIND_RESULTS}}
+    </ol>
+  </div>
+  <div class="find-try" role="group" aria-label="Examples">
+    <button type="button" data-q="lease renewal dates">lease renewal dates</button>
+    <button type="button" data-q="a video for Claude">a video for Claude</button>
+    <button type="button" data-q="my .env before deploy">my .env before deploy</button>
+  </div>
+</section>
+
+<section class="about" id="about" data-chapter="sand" aria-labelledby="about-title">
+  <h2 id="about-title" class="sr-only">About AmagiLabs</h2>
+  <ul class="facts" data-reveal>
+    <li><span>Licence</span> MIT, on every repo</li>
+    <li><span>Since</span> {{FIRST_MONTH}}</li>
+    <li><span>Write to</span> <a href="mailto:dev@amagisolutionsgroup.com">dev@amagisolutionsgroup.com</a></li>
+  </ul>
+  <div class="bio">
+    <p class="bio-lead" data-reveal><img class="dropcap" src="assets/brand/amagilabs-icon-480.webp" width="480" height="480" alt="The AmagiLabs mark: a flask with steam curling into clouds, on a terracotta disc" loading="lazy"><strong>AmagiLabs</strong> is the open-source lab of Amagisolutionsgroup, Inc. We build small tools for the paperwork and plumbing small firms run on: lease and contract deadlines, receipts for the books, federal RFP matrices, court deadlines, and the checks a developer runs before a deploy.</p>
+    <p class="bio-more" data-reveal>Each one is a Python command-line tool you install with pipx and run on your own machine. {{SKILL_COUNT_CAP}} of the {{COUNT_WORD}} ship a Claude skill, so <a href="https://docs.claude.com/en/docs/claude-code/overview">Claude Code</a> can run the tool for you. Found a bug? Open an issue on that tool's repo. Done-with-you setup lives at <a href="https://amagilabs.ai">amagilabs.ai</a>.</p>
+  </div>
+</section>
+</main>
+
+<footer class="foot" data-chapter="clay">
+  <div class="foot-top">
+    <p class="foot-note"><img src="assets/brand/amagilabs-icon-96.png" width="32" height="32" alt=""> AmagiLabs, the open-source lab of Amagisolutionsgroup, Inc.</p>
+    <p class="foot-note">Questions, bug reports, a tool you wish existed: write to us.</p>
+    <a class="foot-up" href="#top">Back to top</a>
+  </div>
+  <a class="foot-mail" href="mailto:dev@amagisolutionsgroup.com"><span>dev</span><span>@amagisolutionsgroup.com</span></a>
+  <div class="foot-meta">
+    <p><a href="https://github.com/amagilabs">github.com/amagilabs</a> <a href="https://amagilabs.ai">amagilabs.ai</a></p>
+    <p>Pictures are frames from each repo's own demo recording. List updated {{FETCHED}}.</p>
+    <p>&copy; 2026 Amagisolutionsgroup, Inc.</p>
+  </div>
+</footer>
+
+<p class="sr-only" id="copy-status" aria-live="polite"></p>
+<script type="application/json" id="repo-data">{{DATA}}</script>
+<script src="assets/site.js" defer></script>
+</body>
+</html>
